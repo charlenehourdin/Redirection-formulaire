@@ -2,10 +2,31 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>Redirection</title>
   <script>
+    var FORMS = {
+      fr: "https://mdns.typeform.com/OpenCall2026?typeform-source=spheranetwork.com",
+      en: "https://mdns.typeform.com/spheracollab",
+    };
+
     var languages = navigator.languages || [navigator.language || "en"];
-    var detected = languages[0].toLowerCase().split("-")[0];
-    alert("Langue détectée : " + detected + "\nToutes les langues : " + JSON.stringify(languages));
+    var target = FORMS["en"]; // défaut
+
+    for (var i = 0; i < languages.length; i++) {
+      var lang = languages[i].toLowerCase().split("-")[0];
+      if (FORMS[lang]) {
+        target = FORMS[lang];
+        break;
+      }
+    }
+
+    window.location.replace(target);
   </script>
 </head>
+<body>
+  <p>
+    <a href="https://mdns.typeform.com/OpenCall2026?typeform-source=spheranetwork.com">🇫🇷 Français</a>
+    <a href="https://mdns.typeform.com/spheracollab">🇬🇧 English</a>
+  </p>
+</body>
 </html>
