@@ -4,35 +4,33 @@
   <meta charset="UTF-8">
   <title>Redirection</title>
   <script>
-    // ============================================
-    // CONFIGURATION
-    // ============================================
     var FORMS = {
       fr: "https://mdns.typeform.com/OpenCall2026?typeform-source=spheranetwork.com",
-      en: "https://mdns.typeform.com/spheracollab",  // 
+      en: "https://mdns.typeform.com/spheracollab",
     };
     var DEFAULT = "en";
-    // ============================================
 
     var languages = navigator.languages || [navigator.language || "en"];
+    var redirected = false; // 👈 Variable de contrôle
 
     for (var i = 0; i < languages.length; i++) {
       var lang = languages[i].toLowerCase().split("-")[0];
       if (FORMS[lang]) {
         window.location.replace(FORMS[lang]);
+        redirected = true; // 👈 On marque que c'est fait
         break;
       }
     }
 
-    // Aucune correspondance → défaut
-    window.location.replace(FORMS[DEFAULT]);
+    if (!redirected) { // 👈 Seulement si aucune langue trouvée
+      window.location.replace(FORMS[DEFAULT]);
+    }
   </script>
 </head>
 <body>
-  <!-- Ne s'affiche jamais sauf si JS désactivé -->
   <p>
-    <a href="https://mdns.typeform.com/spheracollab">🇫🇷 Français</a>
-    <a href="https://mdns.typeform.com/OpenCall2026?typeform-source=spheranetwork.com">🇬🇧 English</a>
+    <a href="https://mdns.typeform.com/OpenCall2026?typeform-source=spheranetwork.com">🇫🇷 Français</a>
+    <a href="https://mdns.typeform.com/spheracollab">🇬🇧 English</a>
   </p>
 </body>
 </html>
